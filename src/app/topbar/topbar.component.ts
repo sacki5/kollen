@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./topbar.component.css']
 })
 export class TopbarComponent implements OnInit {
-  churchName = 'Immanuelsyrkan';
+  churchName = 'Immanuelskyrkan Malmö';
   constructor() { }
 
   ngOnInit() {

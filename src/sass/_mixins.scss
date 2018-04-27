@@ -1,0 +1,4 @@
+@mixin btn-width($paddingX) {
+    padding-left: $paddingX;
+    padding-right: $paddingX;
+}

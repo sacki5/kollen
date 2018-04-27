@@ -1,0 +1,13 @@
+@import './variables';
+@import './mixins';
+@import "~bootstrap/scss/bootstrap.scss";
+@import url('https://fonts.googleapis.com/css?family=Catamaran:400,500,600,700');
+
+
+body {
+    font-family: 'Catamaran', sans-serif;
+}
+
+.btn-wide {
+    @include btn-width(3rem);
+}

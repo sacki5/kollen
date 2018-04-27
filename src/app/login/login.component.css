@@ -1,0 +1,11 @@
+#loginbox {
+    top:50%;
+    transform: translateY(-100%);
+    position:absolute;
+}
+
+#loginform {
+    max-width: 380px;
+    margin-left: auto;
+    margin-right: auto;
+}

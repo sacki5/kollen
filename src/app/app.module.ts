@@ -9,6 +9,8 @@ import { AppRoutingModule } from './/app-routing.module';
 import { MainComponent } from './main/main.component';
 import { TopbarComponent } from './topbar/topbar.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
+import { PersonsComponent } from './persons/persons.component';
+import { GroupsComponent } from './groups/groups.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +19,8 @@ import { SidenavComponent } from './sidenav/sidenav.component';
     MainComponent,
     TopbarComponent,
     SidenavComponent,
+    PersonsComponent,
+    GroupsComponent,
   ],
   imports: [
     BrowserModule,
