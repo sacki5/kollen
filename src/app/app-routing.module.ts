@@ -22,8 +22,7 @@ const routes: Routes = [
       }
     ]
   },
-  { path: 'dashboard', component: MainComponent},
-  { path: '**', redirectTo: '/dashboard'},
+  { path: '**', redirectTo: '/persons'},
 ];
 
 @NgModule({

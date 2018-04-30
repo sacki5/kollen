@@ -1,3 +1,23 @@
-<p>
-  persons works!
-</p>
+
+
+<table class="table">
+  <thead>
+    <tr>  
+      <th scope="col">Namn</th>
+      <th scope="col">Telefon</th>
+      <th scope="col">Epostadress</th>
+      <th scope="col">Födelsedatum</th>
+      <th scope="col">Taggar</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr *ngFor="let person of persons"> 
+        
+          <td>{{ person.firstName}} {{ person.lastName}}</td>
+          <td>{{ person.phone}}</td>
+          <td>{{ person.email}}</td>
+          <td>{{ person.dateOfBirth.$date}}</td>
+          <td>{{ person.tags}}</td>
+      </tr>
+  </tbody>
+</table>
