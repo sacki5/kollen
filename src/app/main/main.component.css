@@ -1,5 +1,33 @@
-.content {
-    margin-top:100px;
-    margin-left: 275px;
+ mat-sidenav-container {
+    background: none;
+ }
+
+ mat-sidenav {
+    width: 220px;
+    height:100%;
+    position: fixed;
+    top:67px;
+    background:none;
+  }
+  
+  mat-sidenav-content {
+      padding: 0 40px;
+  }
+
+  .sidenav-item {
+    transition: .3s;
+    border:none;
+    border-top-right-radius: 100px;
+    border-bottom-right-radius: 100px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left:60px;
+    cursor:pointer;
+}
+.sidenav-item:focus {
+    outline: none;
 }
 
+.sidenav-item:hover:not(.active) {
+    background:#eeeeee;
+}

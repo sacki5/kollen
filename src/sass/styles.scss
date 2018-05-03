@@ -1,13 +1,14 @@
 @import './variables';
 @import './mixins';
 @import "~bootstrap/scss/bootstrap.scss";
+// @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 @import url('https://fonts.googleapis.com/css?family=Catamaran:400,500,600,700');
 
 
 body {
-    font-family: 'Catamaran', sans-serif;
+    font-family: 'Catamaran', sans-serif; 
+    padding: 0;
+    margin: 0;
 }
 
-.btn-wide {
-    @include btn-width(3rem);
-}
+

@@ -1,6 +1,17 @@
 <app-topbar></app-topbar>
-<app-sidenav></app-sidenav>
 
-<div class="content">
-    <router-outlet></router-outlet>
-</div>
+<mat-sidenav-container class="example-container">
+	<mat-sidenav mode="side" opened>
+		<ul class="list-group mt-2">
+			<li routerLink="/dashboard" class="list-group-item sidenav-item" routerLinkActive="active">Startsida</li>
+			<li routerLink="/persons" class="list-group-item sidenav-item" routerLinkActive="active">Personer</li>
+			<li routerLink="/groups" href="/groups" class="list-group-item sidenav-item" routerLinkActive="active">Grupper</li>
+		</ul>
+	</mat-sidenav>
+
+	<mat-sidenav-content>
+		<router-outlet></router-outlet>
+	</mat-sidenav-content>
+</mat-sidenav-container>
+  
+ 

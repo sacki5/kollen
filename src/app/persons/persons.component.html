@@ -1,23 +1,37 @@
 
+<button type="button" pButton icon="fa-file-o" iconPos="left" label="All Data" (click)="tt.exportCSV()">Export all</button>
+<button type="button" pButton icon="fa-file" iconPos="left" label="Selection Only" (click)="tt.exportCSV({selectionOnly:true})">Export selection</button>
+<p-multiSelect [options]="cols" [(ngModel)]="selectedColumns" optionLabel="header" selectedItemsLabel="{0} columns selected" [style]="{minWidth: '200px'}" defaultLabel="Choose Columns"></p-multiSelect>
+<i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+<input type="text" pInputText size="50" placeholder="Global Filter" (input)="tt.filterGlobal($event.target.value, 'contains')" style="width:auto">
 
-<table class="table">
-  <thead>
-    <tr>  
-      <th scope="col">Namn</th>
-      <th scope="col">Telefon</th>
-      <th scope="col">Epostadress</th>
-      <th scope="col">Födelsedatum</th>
-      <th scope="col">Taggar</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr *ngFor="let person of persons"> 
-        
-          <td>{{ person.firstName}} {{ person.lastName}}</td>
-          <td>{{ person.phone}}</td>
-          <td>{{ person.email}}</td>
-          <td>{{ person.dateOfBirth.$date}}</td>
-          <td>{{ person.tags}}</td>
-      </tr>
-  </tbody>
-</table>
+
+<p-table #tt [columns]="selectedColumns" [value]="persons" [resizableColumns]="true" [(selection)]="selectedPersons">
+	<ng-template pTemplate="header" let-columns>
+		<tr>
+			<th style="width: 2.25em">
+					<p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+			</th>
+			<th *ngFor="let col of columns" [pSortableColumn]="col.field"  pResizableColumn>
+				{{col.header}}
+				<p-sortIcon [field]="col.field"></p-sortIcon>
+			</th>
+		</tr>
+	</ng-template>
+
+	<ng-template pTemplate="body" let-person let-columns="columns" let-rowIndex="rowIndex">
+		<tr [pSelectableRow]="person">
+				<td>
+						<p-tableCheckbox [value]="person"></p-tableCheckbox>
+				</td>
+			<td *ngFor="let col of columns" class="ui-resizable-column">
+				{{person[col.field]}}
+			</td>
+		</tr>
+	</ng-template>
+
+	<ng-template pTemplate="summary">
+			{{persons?.length}} personer visas
+	</ng-template>
+</p-table>
+

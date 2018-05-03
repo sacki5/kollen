@@ -6,29 +6,28 @@ import { PersonsComponent }     from './persons/persons.component';
 import { GroupsComponent }      from './groups/groups.component';
 
 const routes: Routes = [
-  { path: 'login', component: LoginComponent },
-  
-  { path: '', 
-    component: MainComponent,
-    children: [
-      {
-        path: 'persons',
-        component: PersonsComponent,
-       
-      },
-      {
-        path: 'groups',
-        component: GroupsComponent
-      }
-    ]
-  },
-  { path: '**', redirectTo: '/persons'},
+	{ path: 'login', component: LoginComponent },
+	{ path: '', 
+		component: MainComponent,
+		children: [
+			{
+				path: 'persons',
+				component: PersonsComponent,
+			 
+			},
+			{
+				path: 'groups',
+				component: GroupsComponent
+			}
+		]
+	},
+	{ path: '**', redirectTo: '/persons'},
 ];
 
 @NgModule({
-  
-  imports: [ RouterModule.forRoot(routes), RouterModule.forChild(routes) ],
-  exports: [ RouterModule ]
+	
+	imports: [ RouterModule.forRoot(routes), RouterModule.forChild(routes) ],
+	exports: [ RouterModule ]
 })
 export class AppRoutingModule {}
 
