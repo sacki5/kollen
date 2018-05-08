@@ -3,7 +3,7 @@
  }
 
  mat-sidenav {
-    width: 220px;
+    width: 200px;
     height:100%;
     position: fixed;
     top:67px;
@@ -11,7 +11,7 @@
   }
   
   mat-sidenav-content {
-      padding: 0 40px;
+      padding:40px;
   }
 
   .sidenav-item {
@@ -21,7 +21,7 @@
     border-bottom-right-radius: 100px;
     padding-top: 10px;
     padding-bottom: 10px;
-    padding-left:60px;
+    padding-left:40px;
     cursor:pointer;
 }
 .sidenav-item:focus {
@@ -30,4 +30,8 @@
 
 .sidenav-item:hover:not(.active) {
     background:#eeeeee;
+}
+
+.ui-state-default {
+    border-color: #3399ff;   
 }
