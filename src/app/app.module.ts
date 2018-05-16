@@ -20,6 +20,7 @@ import { PersonsComponent } from './persons/persons.component';
 import { GroupsComponent } from './groups/groups.component';
 import { PersonsService } from './persons.service';
 import { AddPersonComponent } from './add-person/add-person.component';
+import { EditPersonComponent } from './edit-person/edit-person.component';
 
 @NgModule({
 	declarations: [
@@ -30,6 +31,7 @@ import { AddPersonComponent } from './add-person/add-person.component';
 		PersonsComponent,
 		GroupsComponent,
 		AddPersonComponent,
+		EditPersonComponent,
 	],
 	imports: [
 		BrowserModule,

@@ -7,41 +7,38 @@ import {NgbDateParserFormatter, NgbDatepickerConfig, NgbDateStruct} from '@ng-bo
 
 
 @Component({
-	selector: 'app-add-person',
-	templateUrl: './add-person.component.html',
-	styleUrls: ['./add-person.component.css'],
-	providers: [NgbDatepickerConfig] 
+  selector: 'app-add-person',
+  templateUrl: './add-person.component.html',
+  styleUrls: ['./add-person.component.css'],
+  providers: [NgbDatepickerConfig],
 
 })
 export class AddPersonComponent implements OnInit {
 
-	constructor(private personService: PersonsService, private parserFormatter: NgbDateParserFormatter, config: NgbDatepickerConfig ) {
-		config.minDate = {year: 1900, month: 1, day: 1};
+  constructor(private personService: PersonsService, private parserFormatter: NgbDateParserFormatter, config: NgbDatepickerConfig ) {
+   config.minDate = {year: 1900, month: 1, day: 1};
 
-	}
+    }
 
+  save(personForm: FormGroup) {
+    personForm.value.dateOfBaptism = this.parserFormatter.format(personForm.value.dateOfBaptism);
+    personForm.value.dateOfBirth = this.parserFormatter.format(personForm.value.dateOfBirth);
+    personForm.value.memberSince = this.parserFormatter.format(personForm.value.memberSince);
 
+    console.log('Saving');
+    console.log(personForm.value);
 
-	
-	save(personForm: FormGroup) {
-		personForm.value.dateOfBaptism = this.parserFormatter.format(personForm.value.dateOfBaptism);
-		personForm.value.dateOfBirth = this.parserFormatter.format(personForm.value.dateOfBirth);
-		personForm.value.memberSince = this.parserFormatter.format(personForm.value.memberSince);
+    this.personService.addPerson(personForm.value).subscribe(
+      (response) => {
+          console.log(response)
+      },
+      (error) => console.error(error)
+    )
+  }
 
-		console.log('Saving');
-		console.log(personForm.value);
-
-		this.personService.addPerson(personForm.value).subscribe(
-			(response) => {
-				console.log(response)
-			},
-			(error) => console.error(error)
-		)
-	}
-
-	ngOnInit() {
-		
-	}
+  ngOnInit() {
+    console.log('fiskbanan');
+  }
 }
 
 
