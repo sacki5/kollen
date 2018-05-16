@@ -27,11 +27,12 @@
 	</ng-template>
 
 	<ng-template pTemplate="body" let-person let-columns="columns" let-rowIndex="rowIndex">
+		
 		<tr [pSelectableRow]="person">
-				<td>
-						<p-tableCheckbox [value]="person"></p-tableCheckbox>
-				</td>
-			<td *ngFor="let col of columns" class="ui-resizable-column">
+			<td>
+					<p-tableCheckbox [value]="person"></p-tableCheckbox>
+			</td>
+			<td *ngFor="let col of columns" class="ui-resizable-column" [routerLink]="['edit', person.id]">
 				{{person[col.field]}}
 			</td>
 		</tr>

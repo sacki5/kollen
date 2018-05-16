@@ -1,7 +1,11 @@
 export class Person {
     firstName: String
     lastName: String
-    dateOfBirth: Date
+    dateOfBirth: {
+        year: Number,
+        month: Number,
+        day: Number
+    }
     email: String
     phone: String
     address: {
@@ -11,11 +15,19 @@ export class Person {
     }
     membership: {
         status: String,
-        since: Date
+        since: {
+            year: Number,
+            month: Number,
+            day: Number
+        }
     }
     prevChurch: {
-        churchName:String,
-        dateOfBaptism: Date
+        churchName: String,
+        dateOfBaptism: {
+            year: Number,
+            month: Number,
+            day: Number
+        }
     }
-    tags:string[]
+    tags: String[]
 }
