@@ -1,19 +1,21 @@
 
 <div class="form-inline mb-2">
-		<button class="btn btn-primary mr-2" routerLink="add">Lägg till</button>
-		<button class="btn btn-secondary mr-2" (click)="onDelete()">Ta bort</button>
-		<div ngbDropdown class="d-inline-block">
-			<button class="btn btn-primary mr-2" id="dropdownBasic1" ngbDropdownToggle>Exportera</button>
-			<div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-				<button class="dropdown-item" label="All Data" (click)="tt.exportCSV()">Exportera allt</button> 
-				<button class="dropdown-item" label="Selection Only" (click)="tt.exportCSV({selectionOnly:true})">Exportera markerade</button>
-			</div>
+	<button class="btn btn-sm btn-primary mr-2" routerLink="add">Lägg till</button>
+	<div ngbDropdown class="d-inline-block">
+		<button class="btn btn-sm btn-primary mr-2" id="dropdownBasic1" ngbDropdownToggle>Exportera</button>
+		<div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+			<button class="dropdown-item" label="All Data" (click)="tt.exportCSV()">Exportera allt</button> 
+			<button class="dropdown-item" label="Selection Only" (click)="tt.exportCSV({selectionOnly:true})">Exportera markerade</button>
 		</div>
-		<input class="form-control mr-2" type="text" pInputText placeholder="Sök ..." (input)="tt.filterGlobal($event.target.value, 'contains')" style="width:auto">
-		<p-multiSelect class="mr-2 float-right" [options]="cols" [(ngModel)]="selectedColumns" optionLabel="header" selectedItemsLabel="{0} kolumner valda" defaultLabel="Choose Columns"></p-multiSelect>	
+	</div> 
+	<input class="form-control mr-2 form-control-sm" type="text" pInputText placeholder="Sök ..." (input)="tt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+	<p-multiSelect class="mr-2 float-right" [options]="cols" [(ngModel)]="selectedColumns" optionLabel="header" selectedItemsLabel="{0} kolumner valda" defaultLabel="Choose Columns"></p-multiSelect>	
+	<button class="btn btn-primary btn-sm mr-2" (click)="resetSelectedColumns()">Återsäll kolumner</button>
 </div>
 
-<p-table #tt [columns]="selectedColumns" [value]="persons" [resizableColumns]="true" [(selection)]="selectedPersons" [paginator]="true" [rows]="15"  (onLazyLoad)="loadPersonsLazy($event)">
+<p-table #tt [columns]="selectedColumns" [value]="persons" [resizableColumns]="true" [(selection)]="selectedPersons" [paginator]="true" [rows]="15">
+	
+	
 	<ng-template pTemplate="header" let-columns>
 		<tr>
 			<th style="width: 2.25em">
@@ -24,7 +26,9 @@
 				<p-sortIcon [field]="col.field"></p-sortIcon>
 			</th>
 		</tr>
+
 	</ng-template>
+
 
 	<ng-template pTemplate="body" let-person let-columns="columns" let-rowIndex="rowIndex">
 		

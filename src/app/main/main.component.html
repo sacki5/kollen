@@ -1,8 +1,14 @@
-<app-topbar></app-topbar>
+<div class="navbar navbar-light noPrint">
+		<a class="navbar-brand" routerLink="/login">
+			<img  src="../../assets/Logo MIN.png" height="30px" class="d-inline-block align-top" alt="">
+		</a>
+		<i class="fa fa-bars" (click)="sidenav.toggle()"></i>
+		<div id="churchName">{{churchName}}</div>
+</div>
 
-<mat-sidenav-container class="example-container">
-	<mat-sidenav mode="side" opened>
-		<ul class="list-group mt-2">
+<mat-sidenav-container>
+	<mat-sidenav #sidenav mode="side" class="noPrint" [(opened)]="opened">
+		<ul class="list-group mt-2 noPrint">
 			<li routerLink="/dashboard" class="list-group-item sidenav-item" routerLinkActive="active">Startsida</li>
 			<li routerLink="/persons" class="list-group-item sidenav-item" routerLinkActive="active">Personer</li>
 			<li routerLink="/groups" href="/groups" class="list-group-item sidenav-item" routerLinkActive="active">Grupper</li>
@@ -14,5 +20,9 @@
 	</mat-sidenav-content>
 </mat-sidenav-container>
   
- 
+<!-- Notification container ( controlled by messageService ) -->
 <p-growl [(value)]="msgs"></p-growl>
+
+
+<p-confirmDialog header="Confirmation" icon="fa fa-question-circle" width="425"></p-confirmDialog>
+

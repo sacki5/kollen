@@ -1,0 +1,32 @@
+
+@page {
+    size: A4;
+  }
+
+
+@page :left {
+    margin-left: 3cm;
+  }
+  
+  @page :right {
+    margin-left: 4cm;
+  }
+
+
+  @page :first {
+
+}
+
+
+@page :blank {
+    @top-center { content: "This page is intentionally left blank." }
+  }
+
+  @media print {
+    form .form-control {
+      border:none;
+    }
+    .noPrint {
+        display: none;
+    }
+  }

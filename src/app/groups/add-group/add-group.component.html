@@ -1,0 +1,71 @@
+
+<div class="row">
+	<div class="col-md-6">
+		<h3>Lägg till grupp</h3>
+		<form (ngSubmit)="save(groupForm.form)" #groupForm="ngForm" novalidate>
+
+
+				<!-- First Name required -->
+				<div class="form-group" [ngClass]="{'was-validated': (name.touched || name.dirty) && !name.valid}">
+					<label for="name">Gruppnamn*</label>
+					<input type="text" class="form-control" id="name" placeholder="Gruppnamn" name="name" required minlenth="1" [ngModel] #name="ngModel">
+					<div class="invalid-feedback">
+							Namn krävs
+					</div>
+        </div>
+        
+        <div class="form-group" [ngClass]="{'was-validated': (description.touched || description.dirty) && !description.valid}">
+					<label for="description">Gruppnamn</label>
+					<textarea type="text" class="form-control" id="description" placeholder="Beskrvning av gruppen" name="description" minlenth="1" [ngModel] #description="ngModel">
+            </textarea>
+				</div>
+
+				<!-- Membership Status -->
+				<div class="form-group ">
+					<label for="type">Grupptyp</label>
+					<select id="type" class="form-control" name="type" [ngModel]='2'>
+            <option value="0">Smågrupp</option>
+            <option value="1">Team</option>
+						<option selected value="2">Övrig</option>
+					</select>
+        </div>
+
+
+			<button type="submit" [disabled]="!groupForm.form.valid" class="btn btn-primary mr-2">Lägg till</button>
+			<button routerLink="/persons" class="btn btn-secondary">Avbryt</button>
+		</form>
+  </div>
+  <div class="col-md-6">
+    <h5>Lägg till medlemmar</h5>
+    <input type="text" class="form-control form-control-sm" pInputText size="50" placeholder="Sök personer" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+    
+    <p-table #dt [value]="persons" selectionMode="multiple" [(selection)]="selectedPersons" [globalFilterFields]="['fullName']" >
+
+        <ng-template pTemplate="body" let-person>
+            <tr >
+                <td>{{person.fullName}} <i class="fa fa-plus-circle fa-lg" [pSelectableRow]="person" aria-hidden="true" ></i></td>
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="summary">
+          Medlemmar:
+          <div class="form-check">
+              <input class="form-check-input" type="radio" name="contact" [(ngModel)]="selectedContact" id="contact" checked="checked">
+              <label class="form-check-label" for="contact">
+                Ingen kontaktperson
+              </label>
+          </div>
+          <div *ngFor="let person of selectedPersons">
+              <div class="form-check">
+                  <input class="form-check-input" type="radio" name="contact" [(ngModel)]="selectedContact" id="contact" value="{{person.id}}">
+                  <label class="form-check-label" for="contact">
+                    {{person.fullName}}
+                  </label>
+              </div>
+          </div>
+        </ng-template>
+    </p-table>
+  </div>
+</div>
+<!-- <input type="checkbox" name="vehicle2" value="Car" class="form-control> {{person.fullName}}
+<i class="fa fa-times-circle fa-lg" aria-hidden="true" [pSelectableRow]="person"></i> -->

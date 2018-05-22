@@ -1,15 +1,14 @@
 
 <div class="row">
 	<div class="col-md-8">
-		<h3>Redigera {{id}}</h3>
+		<h3>Lägg till person</h3>
 		<form (ngSubmit)="save(personForm.form)" #personForm="ngForm" novalidate>
-			
 			<div class="form-row">
 
 				<!-- First Name required -->
 				<div class="form-group col-md-6" [ngClass]="{'was-validated': (firstname.touched || firstname.dirty) && !firstname.valid}">
 					<label for="fistname">Förnamn*</label>
-					<input type="text" class="form-control" id="firstname" placeholder="Förnamn" name="firstName" required minlenth="1" [ngModel]="person?.firstName" #firstname="ngModel">
+					<input type="text" class="form-control" id="firstname" placeholder="Förnamn" name="firstName" required minlenth="1" [ngModel] #firstname="ngModel">
 					<div class="invalid-feedback">
 							Förnamn krävs
 					</div>
@@ -18,7 +17,7 @@
 				<!-- Last Name required -->
 				<div class="form-group col-md-6" [ngClass]="{'was-validated': (lastname.touched || lastname.dirty) && !lastname.valid}">
 					<label for="fistname">Efternamn*</label>
-					<input type="text" class="form-control" id="lastname" placeholder="Efternamn" name="lastName" required minlength="1" [ngModel]="person?.lastName" #lastname="ngModel">
+					<input type="text" class="form-control" id="lastname" placeholder="Efternamn" name="lastName" required minlength="1" [ngModel] #lastname="ngModel">
 					<div class="invalid-feedback">
 							Efternamn krävs
 					</div>
@@ -28,17 +27,19 @@
 
 			<!-- Date of Birth required -->
 			<div class="form-group" [ngClass]="{'was-validated': (dateOfBirth.touched || dateOfBirth.dirty) && !dateOfBirth.valid}">
-				<label for="dateOfBirth">Födelsedatum*</label>
+				<label for="dateOfBirth">Födelsedatum* </label> 
+				<small class="text-muted"> YYYY-MM-DD</small>
 				<div class="input-group">
-						<input id="dateOfBirth" class="form-control" placeholder="yyyy-mm-dd" ngbDatepicker placement="bottom-right" #d="ngbDatepicker" name="dateOfBirth" required minlength="10" [ngModel]="person?.dateOfBirth" placeholder="{{person?.dateOfBirthFormat}}" #dateOfBirth="ngModel">
+						<input id="dateOfBirth" class="form-control" placeholder="yyyy-mm-dd" ngbDatepicker placement="bottom-right" #d="ngbDatepicker" name="dateOfBirth" required [ngModel] #dateOfBirth="ngModel">			
 						<div class="input-group-append">
 							<button class="btn btn-outline-primary" (click)="d.toggle()" type="button">
 								<i class="fa fa-calendar" aria-hidden="true"></i>
 							</button>
 						</div>
-						<div class="">
-								Födelsedatum krävs. yyyy-mm-dd
+						<div class="invalid-feedback">
+							Födelsedatum krävs. yyyy-mm-dd
 						</div>
+						
 					</div>
 			</div>
 
@@ -48,7 +49,7 @@
 				<!-- Membership Status -->
 				<div class="form-group col-md-6">
 					<label for="memebershipStatus">Medlem</label>
-					<select id="membershipStatus" class="form-control" name="membershipStatus" [ngModel]='person?.membershipStatus'>
+					<select id="membershipStatus" class="form-control" name="membershipStatus" [ngModel]='"true"'>
 						<option value="false">Icke medlem</option>
 						<option selected value="true">Medlem</option>
 					</select>
@@ -57,15 +58,13 @@
 				<!-- Member since -->
 				<div class="form-group col-md-6" [ngClass]="{'was-validated': (memberSince.touched || memberSince.dirty) && !memberSince.valid}">
 					<label for="memberSince">Medlem sedan</label>
+					<small class="text-muted"> YYYY-MM-DD</small>
 					<div class="input-group">
-						<input id="memberSince" class="form-control" placeholder="yyyy-mm-dd" ngbDatepicker placement="bottom-right" #d2="ngbDatepicker" name="memberSince" #memberSince="ngModel" [ngModel]="person?.memberSince">
+						<input id="memberSince" class="form-control" placeholder="yyyy-mm-dd" ngbDatepicker placement="bottom-right" #d2="ngbDatepicker" name="memberSince" #memberSince="ngModel" [ngModel]>
 						<div class="input-group-append">
 							<button class="btn btn-outline-primary" (click)="d2.toggle()" type="button">
 								<i class="fa fa-calendar" aria-hidden="true"></i>
 							</button>
-						</div>
-						<div class="invalid-feedback">
-							Korrekt format yyyy-mm-dd
 						</div>
 					</div>
 				</div>
@@ -77,7 +76,7 @@
 				<!-- Emailadress -->
 				<div class="form-group col-md-6" [ngClass]="{'was-validated': (email.touched || email.dirty) && !email.valid}">
 					<label for="email">Epostadress</label>
-					<input type="email" class="form-control" id="email" [email]="personForm.value.email!='' && personForm.value.email!=null" placeholder="Epostadress" name="email" #email="ngModel" [ngModel]="person?.email">
+					<input type="email" class="form-control" id="email" [email]="personForm.value.email!='' && personForm.value.email!=null" placeholder="Epostadress" name="email" #email="ngModel" [ngModel]>
 					<div class="invalid-feedback">
 						Skriv in en korrekt epostadress
 					</div>
@@ -86,31 +85,31 @@
 				<!-- Phonenumber -->
 				<div class="form-group col-md-6" [ngClass]="{'was-validated': (phone.touched || phone.dirty) && !phone.valid}">
 					<label for="phone">Telefonnummer</label>
-					<input type="text" class="form-control" id="phone" minlength="5" pattern="[+]?[0-9]*$" placeholder="Telefonnummer" name="phone" #phone="ngModel" [ngModel]="person?.phone">
+					<input type="text" class="form-control" id="phone" minlength="5" pattern="[+]?[0-9]*$" placeholder="Telefonnummer" name="phone" #phone="ngModel" [ngModel]>
 					<div class="invalid-feedback">
 						Skriv in ett giltligt telefonnummer
 					</div>
 				</div>
 			</div>
 
-			<div class="form-row">
-				<div class="form-group col-md-6" [ngClass]="{'was-validated': (address.touched || address.dirty) && !address.valid}">
+			<div class="form-row" ngModelGroup="address">
+				<div class="form-group col-md-6" [ngClass]="{'was-validated': (addressLine1.touched || addressLine1.dirty) && !addressLine1.valid}">
 					<label for="adress">Adress</label>
-					<input type="text" class="form-control" placeholder="gatunamn 123" id="adress" name="addressLine1" #address="ngModel" [ngModel]="person?.addressLine1">
+					<input type="text" class="form-control" placeholder="gatunamn 123" id="adress" name="addressLine1" #addressLine1="ngModel" [ngModel]>
 					<div class="invalid-feedback">
 						Skriv in giltlig adress
 					</div>
 				</div>
 				<div class="form-group col-md-4" [ngClass]="{'was-validated': (city.touched || city.dirty) && !city.valid}">
 					<label for="city">Postort</label>
-					<input type="text" class="form-control" id="city" pattern="[a-öA-Ö]*$" placeholder="stad" name="city" #city="ngModel" [ngModel]="person?.city">
+					<input type="text" class="form-control" id="city" pattern="[a-öA-Ö]*$" placeholder="stad" name="city" #city="ngModel" [ngModel]>
 					<div class="invalid-feedback">
 						Skriv in en giltlig postort
 					</div>
 				</div>
 				<div class="form-group col-md-2" [ngClass]="{'was-validated': (zipcode.touched || zipcode.dirty) && !zipcode.valid}">
 					<label for="zipcode">Postnummer</label>
-					<input type="text" class="form-control" id="zipcode" minlength="4" pattern="[0-9]*\s?[0-9]*$" placeholder="postnummer" name="zipcode" #zipcode="ngModel" [ngModel]="person?.zipcode	">
+					<input type="text" class="form-control" id="zipcode" minlength="4" pattern="[0-9]*\s?[0-9]*$" placeholder="postnummer" name="zipcode" #zipcode="ngModel" [ngModel]>
 					<div class="invalid-feedback">
 							Skriv in en giltligt post nummer
 					</div>
@@ -120,12 +119,13 @@
 			<div class="form-row">
 				<div class="form-group col-md-8">
 					<label for="prevChurch">Tidigare församling</label>
-					<input type="text" class="form-control" id="prevChurch" placeholder="Namn på församling" name="prevChurchName" [ngModel]="person?.prevChurchName">
+					<input type="text" class="form-control" id="prevChurch" placeholder="Namn på församling" name="prevChurchName" [ngModel]>
 				</div>
 				<div class="form-group col-md-4">
 					<label for="dateOfBaptism">Dopdag</label>
+					<small class="text-muted"> YYYY-MM-DD</small>
 					<div class="input-group">
-						<input id="dateOfBaptism" class="form-control" placeholder="yyyy-mm-dd" ngbDatepicker placement="top" #d3="ngbDatepicker" name="dateOfBaptism" [ngModel]="person?.dateOfBaptism">
+						<input id="dateOfBaptism" class="form-control" placeholder="yyyy-mm-dd"  ngbDatepicker placement="top" #d3="ngbDatepicker" name="dateOfBaptism" [ngModel]>
 						<div class="input-group-append">
 							<button class="btn btn-outline-primary" (click)="d3.toggle()" type="button">
 								<i class="fa fa-calendar" aria-hidden="true"></i>
@@ -135,13 +135,13 @@
 				</div>
 			</div>
 
-			<div class="form-group">
+			<!-- <div class="form-group">
 				<label for="tags">Taggar</label>
 				<input type="text" class="form-control" id="tags" minlength="1" pattern="(.*\s?)+$" placeholder="Taggar separerade med komma" name="tags" [ngModel]>
-			</div>
+			</div> -->
 			
-			<button type="submit" [disabled]="!personForm.form.valid" class="btn btn-primary">Spara</button>
-			<button routerLink="/persons" class="btn btn-secondary">Tillbaka</button>
+			<button type="submit" [disabled]="!personForm.form.valid" class="btn btn-primary mr-2">Lägg till</button>
+			<button routerLink="/persons" class="btn btn-secondary">Avbryt</button>
 		</form>
 	</div>
 </div>

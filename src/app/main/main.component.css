@@ -11,7 +11,8 @@
   }
   
   mat-sidenav-content {
-      padding:40px;
+      padding:22px 40px 40px 40px;
+      min-height: 500px;
   }
 
   .sidenav-item {
@@ -34,4 +35,14 @@
 
 .ui-state-default {
     border-color: #3399ff;   
+}
+
+.navbar {
+    border-bottom: 1px solid #e0e0e0;
+    padding:5px 40px;
+}
+
+#churchName {
+    margin-left: auto;
+    margin-right: auto;
 }

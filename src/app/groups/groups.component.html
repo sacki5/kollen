@@ -1,2 +1,49 @@
 
-  <h1>Gorups</h1>
+<div class="form-inline mb-2">
+	<button class="btn btn-sm btn-primary mr-2" routerLink="add">Lägg till</button>
+	<button class="btn btn-sm btn-secondary mr-2" (click)="onDelete()">Ta bort</button>
+	<div ngbDropdown class="d-inline-block">
+		<button class="btn btn-sm btn-primary mr-2" id="dropdownBasic1" ngbDropdownToggle>Exportera</button>
+		<div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+			<button class="dropdown-item" label="All Data" (click)="tt.exportCSV()">Exportera allt</button> 
+			<button class="dropdown-item" label="Selection Only" (click)="tt.exportCSV({selectionOnly:true})">Exportera markerade</button>
+		</div>
+	</div> 
+	<input class="form-control mr-2 form-control-sm" type="text" pInputText placeholder="Sök ..." (input)="tt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+	<p-multiSelect class="mr-2 float-right" [options]="cols" [(ngModel)]="selectedColumns" optionLabel="header" selectedItemsLabel="{0} kolumner valda" defaultLabel="Choose Columns"></p-multiSelect>	
+	<button class="btn btn-primary btn-sm mr-2" (click)="resetSelectedColumns()">Återsäll kolumner</button>
+</div>
+
+<p-table #tt [columns]="selectedColumns" [value]="groups" [resizableColumns]="true" [(selection)]="selectedGroups" [paginator]="true" [rows]="15">
+	
+	<ng-template pTemplate="header" let-columns>
+		<tr>
+			<th style="width: 2.25em">
+					<p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+			</th>
+			<th *ngFor="let col of columns" [pSortableColumn]="col.field"  pResizableColumn>
+				{{col.header}}
+				<p-sortIcon [field]="col.field"></p-sortIcon>
+			</th>
+		</tr>
+
+	</ng-template>
+
+
+	<ng-template pTemplate="body" let-group let-columns="columns" let-rowIndex="rowIndex">
+		
+		<tr [pSelectableRow]="group">
+			<td>
+					<p-tableCheckbox [value]="group"></p-tableCheckbox>
+			</td>
+			<td *ngFor="let col of columns" class="ui-resizable-column" [routerLink]="['edit', group.id]">
+				{{group[col.field]}}
+			</td>
+		</tr>
+	</ng-template>
+
+	<ng-template pTemplate="summary">
+			<span *ngIf="selectedGroups?.length > 0">{{selectedGroups?.length}} av </span>{{groups?.length}} grupper
+	</ng-template>
+
+</p-table>
