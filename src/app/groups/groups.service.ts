@@ -17,4 +17,16 @@ export class GroupsService {
   getGroups(): Observable<Group[]> {
     return this.http.get<Group[]>('http://localhost:3000/api/groups')
   }
+
+  getGroup(id): Observable<Group> {
+    return this.http.get<Group>('http://localhost:3000/api/group/' + id)
+  }
+
+  deleteGroup(id): Observable<any> {
+    return this.http.delete<Group>('http://localhost:3000/api/group/' + id)
+  }
+
+  updateGroup(id, group: Group): Observable<Group> {
+    return this.http.patch<Group>('http://localhost:3000/api/group/' + id, group)
+  }
 }

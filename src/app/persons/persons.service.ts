@@ -16,8 +16,12 @@ export class PersonsService {
       return this.http.get<Person[]>('http://localhost:3000/api/persons')
      }
 
-    deletePersons(body): Observable<any> {
-      return this.http.delete<Person[]>('http://localhost:3000/api/persons/' + body)
+     getPersonsNoPop(): Observable<Person[]> {
+      return this.http.get<Person[]>('http://localhost:3000/api/persons/noPop')
+     }
+
+    deletePersons(id): Observable<any> {
+      return this.http.delete<Person[]>('http://localhost:3000/api/persons/' + id)
     }
 
     getPerson(id): Observable<Person> {

@@ -3,7 +3,7 @@ import { FormGroup } from '@angular/forms';
 import { Person } from '../person';
 import { PersonsService } from '../persons.service';
 import { NgbDateParserFormatter, NgbDatepickerConfig, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'primeng/components/common/messageservice';
 import { ConfirmationService } from 'primeng/api';
 import { Location } from '@angular/common';
@@ -17,7 +17,6 @@ export class EditPersonComponent implements OnInit {
 
   // Declareation of class variables
   public person: Person;
-  private sub: any;
   edit = false;
 
   constructor(
@@ -27,9 +26,12 @@ export class EditPersonComponent implements OnInit {
     private messageService: MessageService,
     private confirmationService: ConfirmationService,
     private location: Location,
+    private router: Router,
     config: NgbDatepickerConfig ) {
     config.minDate = {year: 1900, month: 1, day: 1}; // Configuration of datepicker
   }
+
+  ngOnInit() { this.onGet(this.route.snapshot.params.id); }
 
   // Save updated information method
   save(personForm: FormGroup) {
@@ -44,7 +46,7 @@ export class EditPersonComponent implements OnInit {
             summary: 'Sparat',
             detail: response.firstName + ' ' + response.lastName + ' sparad'
           });
-          this.location.back();
+          this.router.navigate(['/persons']);
       },
       (error) => {
         console.error(error)
@@ -69,7 +71,8 @@ export class EditPersonComponent implements OnInit {
             this.onDelete()
         }
     });
-}
+  }
+
   onDelete() {
     this.personsService.deletePersons(this.route.snapshot.params.id).subscribe(
       (response) => {
@@ -109,11 +112,11 @@ export class EditPersonComponent implements OnInit {
         rejectLabel: 'Nej',
         message: 'Är du säker på att du vil lämna utan att spara?',
         accept: () => {
-            this.location.back();
+          this.router.navigate(['/persons']);
         }
     });
     } else {
-      this.location.back();
+      this.router.navigate(['/persons']);
     }
   }
 
@@ -135,6 +138,6 @@ export class EditPersonComponent implements OnInit {
     )
   }
 
-  ngOnInit() { this.onGet(this.route.snapshot.params.id); }
+  
 
 }

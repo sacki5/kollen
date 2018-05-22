@@ -41,7 +41,7 @@
     
     <p-table #dt [value]="persons" selectionMode="multiple" [(selection)]="selectedPersons" [globalFilterFields]="['fullName']" >
 
-        <ng-template pTemplate="body" let-person>
+        <ng-template pTemplate="body" let-person let-rowIndex="person._id">
             <tr >
                 <td>{{person.fullName}} <i class="fa fa-plus-circle fa-lg" [pSelectableRow]="person" aria-hidden="true" ></i></td>
             </tr>

@@ -1,4 +1,5 @@
 export class Person {
+    id: String
     firstName: String
     lastName: String
     dateOfBirth: {

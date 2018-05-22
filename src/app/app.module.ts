@@ -27,6 +27,7 @@ import { EditPersonComponent } from './persons/edit-person/edit-person.component
 import { PersonsService } from './persons/persons.service';
 import { GroupsService } from './groups/groups.service';
 import { AddGroupComponent } from './groups/add-group/add-group.component';
+import { EditGroupComponent } from './groups/edit-group/edit-group.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { AddGroupComponent } from './groups/add-group/add-group.component';
     AddPersonComponent,
     EditPersonComponent,
     AddGroupComponent,
+    EditGroupComponent,
   ],
   imports: [
     BrowserModule,

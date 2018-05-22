@@ -7,6 +7,7 @@ import { Group } from '../group';
 import { Person }	from '../../persons/person';
 import { GroupsService } from '../groups.service';
 import { PersonsService } from '../../persons/persons.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-group',
@@ -23,7 +24,8 @@ export class AddGroupComponent implements OnInit {
     private groupsService: GroupsService,
     private location: Location,
     private messageService: MessageService,
-    private personsService: PersonsService
+    private personsService: PersonsService,
+    private router: Router
   ) { }
 
   save(groupForm: FormGroup) {
@@ -46,7 +48,7 @@ export class AddGroupComponent implements OnInit {
         });
 
         // Sen person back if success
-        this.location.back();
+        this.router.navigate(['/groups']);
       },
       (error) => {
         console.error(error)

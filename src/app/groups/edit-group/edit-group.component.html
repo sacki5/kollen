@@ -1,0 +1,94 @@
+
+<div class="row">
+	<div class="col-md-6">
+		<h3>Redigera "{{group?.name}}" <button class="btn btn-secondary mr-2" (click)="confirmDelete()">Ta bort</button></h3>
+		<form (ngSubmit)="save(groupForm.form)" #groupForm="ngForm" novalidate>
+
+            <div class="form-group" [ngClass]="{'was-validated': (name.touched || name.dirty) && !name.valid}">
+                <label for="name">Gruppnamn*</label>
+                <input type="text" class="form-control" id="name" placeholder="Gruppnamn" name="name" required minlenth="1" [ngModel]="group?.name" #name="ngModel" [disabled]="!edit">
+                <div class="invalid-feedback">
+                        Namn krävs
+                </div>
+            </div>
+        
+            <div class="form-group" [ngClass]="{'was-validated': (description.touched || description.dirty) && !description.valid}">
+                <label for="description">Gruppnamn</label>
+                <textarea type="text" class="form-control" id="description" placeholder="Beskrvning av gruppen" name="description" minlenth="1" [ngModel]="group?.description" #description="ngModel" [disabled]="!edit"></textarea>
+            </div>
+
+            <div class="form-group ">
+                <label for="type">Grupptyp</label>
+                <select id="type" class="form-control" name="type" [ngModel]='group?.type' [disabled]="!edit">
+                    <option value="0">Smågrupp</option>
+                    <option value="1">Team</option>
+                    <option selected value="2">Övrig</option>
+                </select>
+            </div>
+
+
+            <button type="submit" [disabled]="!groupForm.form.valid" class="btn btn-primary mr-2 noPrint" *ngIf="edit">Spara</button>
+			<button type="button" (click)="editTrue()" class="btn btn-primary noPrint mr-2" *ngIf="!edit">Redigera</button>
+			<button type="button" (click)="goBack(groupForm.dirty)" class="btn btn-outline-primary noPrint mr-2">Tillbaka</button>
+		</form>
+    </div>
+    <div class="col-md-6" *ngIf="edit">
+        <h5 >Lägg till medlemmar</h5>
+        <input type="text" class="form-control form-control-sm" pInputText size="50" placeholder="Sök personer" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+    
+        <p-table #dt [value]="persons" selectionMode="multiple" [(selection)]="selectedPersons" [globalFilterFields]="['fullName']" >
+
+            <ng-template pTemplate="body" let-person >
+                <tr >
+                    <td>{{person.fullName}} <i class="fa fa-plus-circle fa-lg" [pSelectableRow]="person" aria-hidden="true" ></i></td>
+                </tr>
+            </ng-template>
+
+
+
+            <ng-template pTemplate="summary">
+            Medlemmar:
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="contact" [(ngModel)]="selectedContact" id="contact" checked="checked">
+                <label class="form-check-label" for="contact">
+                    Ingen kontaktperson
+                </label>
+            </div>
+            <div *ngFor="let person of selectedPersons">
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="contact" [(ngModel)]="selectedContact" id="contact" value="{{person.id}}">
+                    <label class="form-check-label" for="contact">
+                        {{person.fullName}}
+                    </label>
+                </div>
+            </div>
+            </ng-template>
+        </p-table>
+    </div>
+    <div class="col-md-6" *ngIf="!edit">
+        <h5 >Medlemmar</h5>
+        <p-table #dt [value]="selectedPersons">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>Namn</th>
+                    <th>Telefonnummer</th>
+                    <th width="200px">Epostadress</th>
+                    <th></th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-person >
+                <tr routerLink="/persons/edit/{{person.id}}">
+                    <td>{{person.fullName}}</td>
+                    <td>{{person.phone}}</td>
+                    <td>{{person.email}}</td>
+                    <td routerLink="/persons/edit/{{person.id}}"><button class="btn btn-primary btn-sm">Visa</button></td>
+                </tr>
+            </ng-template>
+        </p-table>
+        <h5 class="mt-2">Kontaktperson</h5>
+        <h6>Namn: <a routerLink="/persons/edit/{{group?.contact.id}}">{{group?.contact.fullName}}</a></h6>
+        <h6>Epostadress: <a href="mailto:{{group?.contact.email}}">{{group?.contact.email}}</a></h6>
+        <h6>Telefon: <a href="tel:{{group?.contact.phone}}">{{group?.contact.phone}}</a></h6>
+
+    </div>
+</div>

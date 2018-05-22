@@ -7,6 +7,7 @@ import { GroupsComponent } from './groups/groups.component';
 import { AddPersonComponent}	from './persons/add-person/add-person.component';
 import { EditPersonComponent } from './persons/edit-person/edit-person.component';
 import { AddGroupComponent } from './groups/add-group/add-group.component';
+import { EditGroupComponent } from './groups/edit-group/edit-group.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -32,6 +33,10 @@ const routes: Routes = [
       {
         path: 'groups/add',
         component: AddGroupComponent
+      },
+      {
+        path: 'groups/edit/:id',
+        component: EditGroupComponent
       },
     ]
   },

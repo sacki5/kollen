@@ -5,6 +5,7 @@ import { PersonsService } from '../persons.service';
 import { NgbDateParserFormatter, NgbDatepickerConfig, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { Location } from '@angular/common';
 import { MessageService } from 'primeng/components/common/messageservice';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-person',
@@ -20,7 +21,9 @@ export class AddPersonComponent implements OnInit {
     private parserFormatter: NgbDateParserFormatter,
     private messageService: MessageService,
     config: NgbDatepickerConfig,
-    private location: Location ) {
+    private location: Location,
+    private router: Router
+  ) {
     config.minDate = {year: 1900, month: 1, day: 1};
   }
 
@@ -40,7 +43,7 @@ export class AddPersonComponent implements OnInit {
         });
 
         // Sen person back if success
-        this.location.back();
+        this.router.navigate(['/persons']);
       },
       (error) => {
         console.error(error)
