@@ -65,7 +65,7 @@ export class ProfileComponent implements OnInit {
           detail: response.church + ' sparad'
         });
 
-        this.router.navigate(['/persons']);
+        window.location.reload();
       },
       (error) => {
         console.error(error);
