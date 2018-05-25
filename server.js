@@ -24,7 +24,7 @@ const path = require('path');
 
 // Middleware
 app.use(bodyParser.json());
-app.use('/', express.static(__dirname+'/dist'));
+app.use(express.static(__dirname+'/dist/'));
 
 app.use(session({
     secret: 'ZsssCrHDg2qKZdENtrBbMao7',
@@ -69,12 +69,7 @@ passport.deserializeUser(function(user, done) {
     });
 });
 
-/**
-* Middleware Function to test authentications agains passportJS
-* @param {object} req fdsfsdfsd
-* @param {object} res fdsfsdfsd
-* @param {callback} next fdsfsdfsd
-*/
+
 function checkAuthentication(req, res, next) {
     if (req.isAuthenticated()) {
         next();
@@ -82,7 +77,6 @@ function checkAuthentication(req, res, next) {
         res.redirect('/login');
     }
 }
-
 
 // Person routes
 app.post('/api/person', checkAuthentication, (req, res) => { // Create a person using request body
@@ -323,14 +317,8 @@ app.get('/api/profile', checkAuthentication, (req, res) => {
 });
 
 
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname+'/dist', 'index.html'));
-});
-
-// app.use(function(req, res, next) {
-// var err = new Error('Not Found');
-// err.status = 404;
-// next(err);
+// app.get('*', (req, res) => {
+//     res.sendFile(path.join(__dirname+'/dist/'));
 // });
 
 app.listen(port, () => {
