@@ -4,6 +4,9 @@
   "license": "MIT",
   "author": "Isac Ljung",
   "angular-cli": {},
+  "engines": {
+    "npm": "8.11.1"
+  },
   "scripts": {
     "ng": "ng",
     "start": "node server.js",
