@@ -56,7 +56,7 @@ export class ProfileComponent implements OnInit {
 
     this.userService.updateUser(userForm.value).subscribe(
       (response) => {
-        
+
         this.getUser();
 
         this.messageService.add({
@@ -65,6 +65,7 @@ export class ProfileComponent implements OnInit {
           detail: response.church + ' sparad'
         });
 
+        this.router.navigate(['/persons']);
       },
       (error) => {
         console.error(error);
