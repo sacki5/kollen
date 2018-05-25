@@ -2,14 +2,26 @@
   <div class="row">
       <div id="loginbox" class="col-md-4 offset-md-4">
           <img width="265px" class="img-fluid mx-auto d-block mb-4" src="../../assets/Logo.png">
-          <form id="loginform" class="text-center">
-              <input type="text" placeholder="Epostadress" class="form-control mb-3">
-              <input type="password" placeholder="Lösenord" class="form-control mb-3">
-              <button type="button" class="btn btn-primary btn-wide" routerLink="/">Login</button>
-            </form>
+          <form (ngSubmit)="login(userForm.form)" #userForm="ngForm" novalidate>
+
+      
+              <!-- Emailadress -->
+              <div class="form-group">
+                <input type="email" class="form-control" id="email" placeholder="Epostadress" name="email" #email="ngModel" required [ngModel]>
+              </div>
+      
+
+              <!-- Password -->
+              <div class="form-group">
+                <input type="password" class="form-control" id="password" placeholder="Lösenord" name="password" #password="ngModel" required [ngModel]>
+              </div>
+
+      
+            <button type="submit" [disabled]="!userForm.form.valid" class="btn btn-primary mr-2">Logga in</button>
+          </form>
       </div>  
   </div>
-  <button type="button" class="btn btn-secondary mt-4 mr-2 float-right">Registrera dig!</button>
+  <button type="button" routerLink="/register" class="btn btn-secondary mt-4 mr-2 float-right">Registrera dig!</button>
 </div>
 
 

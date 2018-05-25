@@ -2,7 +2,7 @@ export class Group {
     name: String
     description: String
     type: Number
-    contact: String
+    contact
     tags: String[]
     churchIdentity: String
     members: String[]

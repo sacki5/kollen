@@ -20,9 +20,9 @@ export class AddPersonComponent implements OnInit {
     private personService: PersonsService,
     private parserFormatter: NgbDateParserFormatter,
     private messageService: MessageService,
-    config: NgbDatepickerConfig,
     private location: Location,
-    private router: Router
+    private router: Router,
+    config: NgbDatepickerConfig,
   ) {
     config.minDate = {year: 1900, month: 1, day: 1};
   }
@@ -31,9 +31,10 @@ export class AddPersonComponent implements OnInit {
   save(personForm: FormGroup) {
     console.log('Saving');
 
+    personForm.value.churchIdentity = JSON.parse(localStorage['userData'])._id;
     this.personService.addPerson(personForm.value).subscribe(
       (response) => {
-        console.log(response)
+        console.log(response);
 
         // Send notification if success.
         this.messageService.add({
@@ -46,7 +47,7 @@ export class AddPersonComponent implements OnInit {
         this.router.navigate(['/persons']);
       },
       (error) => {
-        console.error(error)
+        console.error(error);
 
         // Send notification about error
         this.messageService.add({
@@ -55,7 +56,7 @@ export class AddPersonComponent implements OnInit {
           detail: 'Testa igen eller kontakta teknisk support'
         });
       }
-    )
+    );
   }
 
   ngOnInit() {}

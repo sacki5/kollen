@@ -39,7 +39,7 @@ export class EditPersonComponent implements OnInit {
 
     this.personsService.updatePerson(this.route.snapshot.params.id, personForm.value).subscribe(
       (response) => {
-          console.log(response)
+          console.log(response);
           // Send success notification
           this.messageService.add({
             severity: 'success',
@@ -49,7 +49,7 @@ export class EditPersonComponent implements OnInit {
           this.router.navigate(['/persons']);
       },
       (error) => {
-        console.error(error)
+        console.error(error);
 
         // Send error notification
         this.messageService.add({
@@ -58,7 +58,7 @@ export class EditPersonComponent implements OnInit {
           detail: 'Testa igen eller kontakta teknisk support'
         });
       }
-    )
+    );
   }
 
   confirmDelete() {
@@ -68,7 +68,7 @@ export class EditPersonComponent implements OnInit {
         rejectLabel: 'Nej',
         message: 'Är du säker att du vill ta bort "' + this.person.firstName + ' ' + this.person.lastName + '"',
         accept: () => {
-            this.onDelete()
+            this.onDelete();
         }
     });
   }
@@ -94,14 +94,14 @@ export class EditPersonComponent implements OnInit {
         }
       },
       (error) => {
-        console.error(error)
+        console.error(error);
         this.messageService.add({
           severity: 'error',
           summary: 'Något gick fel',
           detail: 'Testa igen eller kontakta teknisk support'
         });
       }
-    )
+    );
   }
 
   goBack(dirty) {
@@ -125,19 +125,18 @@ export class EditPersonComponent implements OnInit {
   }
 
   print(): void {
-    window.print()
+    window.print();
   }
 
   // Method to get information, called on onInit.
   onGet(id) {
     this.personsService.getPerson(id).subscribe(
       (person) => {
-        this.person = person
+        this.person = person;
       },
       (error) => console.error(error)
-    )
+    );
   }
 
-  
 
 }

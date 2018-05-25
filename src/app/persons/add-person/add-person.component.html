@@ -76,7 +76,7 @@
 				<!-- Emailadress -->
 				<div class="form-group col-md-6" [ngClass]="{'was-validated': (email.touched || email.dirty) && !email.valid}">
 					<label for="email">Epostadress</label>
-					<input type="email" class="form-control" id="email" [email]="personForm.value.email!='' && personForm.value.email!=null" placeholder="Epostadress" name="email" #email="ngModel" [ngModel]>
+					<input type="email" class="form-control" id="email" [email]="true" placeholder="Epostadress" name="email" #email="ngModel" [ngModel]>
 					<div class="invalid-feedback">
 						Skriv in en korrekt epostadress
 					</div>
@@ -135,10 +135,10 @@
 				</div>
 			</div>
 
-			<!-- <div class="form-group">
+			<div class="form-group">
 				<label for="tags">Taggar</label>
 				<input type="text" class="form-control" id="tags" minlength="1" pattern="(.*\s?)+$" placeholder="Taggar separerade med komma" name="tags" [ngModel]>
-			</div> -->
+			</div>
 			
 			<button type="submit" [disabled]="!personForm.form.valid" class="btn btn-primary mr-2">Lägg till</button>
 			<button routerLink="/persons" class="btn btn-secondary">Avbryt</button>

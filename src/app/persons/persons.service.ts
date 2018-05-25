@@ -9,26 +9,26 @@ export class PersonsService {
   constructor(private http: HttpClient) {}
 
     addPerson(person: Person): Observable<Person> {
-      return this.http.post<Person>('http://localhost:3000/api/person', person)
+      return this.http.post<Person>('/api/person', person);
     }
 
     getPersons(): Observable<Person[]> {
-      return this.http.get<Person[]>('http://localhost:3000/api/persons')
+      return this.http.get<Person[]>('/api/persons');
      }
 
      getPersonsNoPop(): Observable<Person[]> {
-      return this.http.get<Person[]>('http://localhost:3000/api/persons/noPop')
+      return this.http.get<Person[]>('/api/persons/noPop');
      }
 
     deletePersons(id): Observable<any> {
-      return this.http.delete<Person[]>('http://localhost:3000/api/persons/' + id)
+      return this.http.delete<Person[]>('/api/persons/' + id);
     }
 
     getPerson(id): Observable<Person> {
-      return this.http.get<Person>('http://localhost:3000/api/person/' + id)
+      return this.http.get<Person>('/api/person/' + id);
     }
 
     updatePerson(id, person: Person): Observable<Person> {
-      return this.http.patch<Person>('http://localhost:3000/api/person/' + id, person)
+      return this.http.patch<Person>('/api/person/' + id, person);
     }
 }

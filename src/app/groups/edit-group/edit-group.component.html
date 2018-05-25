@@ -71,9 +71,9 @@
             <ng-template pTemplate="header">
                 <tr>
                     <th>Namn</th>
-                    <th>Telefonnummer</th>
-                    <th width="200px">Epostadress</th>
-                    <th></th>
+                    <th width="150px">Telefonnummer</th>
+                    <th >Epostadress</th>
+                    <th width="60px"></th>
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-person >
@@ -86,9 +86,8 @@
             </ng-template>
         </p-table>
         <h5 class="mt-2">Kontaktperson</h5>
-        <h6>Namn: <a routerLink="/persons/edit/{{group?.contact.id}}">{{group?.contact.fullName}}</a></h6>
-        <h6>Epostadress: <a href="mailto:{{group?.contact.email}}">{{group?.contact.email}}</a></h6>
-        <h6>Telefon: <a href="tel:{{group?.contact.phone}}">{{group?.contact.phone}}</a></h6>
-
+        <h6>Namn: <a routerLink="/persons/edit/{{group?.contact?.id}}">{{group?.contact?.fullName}}</a></h6>
+        <h6>Epostadress: <a href="mailto:{{group?.contact?.email}}">{{group?.contact?.email}}</a></h6>
+        <h6>Telefon: <a href="tel:{{group?.contact?.phone}}">{{group?.contact?.phone}}</a></h6>
     </div>
 </div>

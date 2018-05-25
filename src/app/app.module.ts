@@ -26,8 +26,12 @@ import { EditPersonComponent } from './persons/edit-person/edit-person.component
 
 import { PersonsService } from './persons/persons.service';
 import { GroupsService } from './groups/groups.service';
+import { UserService } from './user.service';
 import { AddGroupComponent } from './groups/add-group/add-group.component';
 import { EditGroupComponent } from './groups/edit-group/edit-group.component';
+import { RegisterComponent } from './register/register.component';
+import { CanActivateViaAuthGuard } from './can-activate-via-auth-guard';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +44,8 @@ import { EditGroupComponent } from './groups/edit-group/edit-group.component';
     EditPersonComponent,
     AddGroupComponent,
     EditGroupComponent,
+    RegisterComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -55,7 +61,14 @@ import { EditGroupComponent } from './groups/edit-group/edit-group.component';
     SliderModule,
     ConfirmDialogModule
   ],
-  providers: [PersonsService, GroupsService, MessageService, ConfirmationService],
+  providers: [
+    PersonsService,
+    GroupsService,
+    MessageService,
+    UserService,
+    ConfirmationService,
+    CanActivateViaAuthGuard
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

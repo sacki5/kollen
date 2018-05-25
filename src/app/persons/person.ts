@@ -1,19 +1,20 @@
 export class Person {
-    id: String
-    firstName: String
-    lastName: String
+    id: String;
+    firstName: String;
+    lastName: String;
     dateOfBirth: {
         year: Number,
         month: Number,
         day: Number
-    }
-    email: String
-    phone: String
+    };
+    email: String;
+    phone: String;
+    groups: any[];
     address: {
         addressLine1: String,
         zipcode: String,
         city: String
-    }
+    };
     membership: {
         status: String,
         since: {
@@ -21,7 +22,7 @@ export class Person {
             month: Number,
             day: Number
         }
-    }
+    };
     prevChurch: {
         churchName: String,
         dateOfBaptism: {
@@ -29,6 +30,6 @@ export class Person {
             month: Number,
             day: Number
         }
-    }
-    tags: String[]
+    };
+    tags: String[];
 }

@@ -20,9 +20,6 @@ export class PersonsComponent implements OnInit, OnDestroy {
   selectedColumns: any[];
   selectedPersons: any[];
   standardColumns: any[];
-  // loading: boolean; // USED FOR LAZY LOADING
-  // totalRecords: number; // USED FOR LAZY LOADING
-  // datasource: Person[];// USED FOR LAZY LOADING
 
   constructor(private personsService: PersonsService, private messageService: MessageService ) {
     this.alive = true;
@@ -31,8 +28,8 @@ export class PersonsComponent implements OnInit, OnDestroy {
       { field: 'fullName', header: 'Namn' },
       { field: 'phone', header: 'Telefonnummer' },
       { field: 'email', header: 'Epostadress' },
-      { field: 'addressPretty', header: 'Adress' },
-    ]
+      { field: 'tags', header: 'Taggar' },
+    ];
   }
 
   // Method to get persons, called on ngOnInit
@@ -40,12 +37,13 @@ export class PersonsComponent implements OnInit, OnDestroy {
     this.personsService.getPersons().subscribe(
       (persons) => {
         this.persons = persons;
+        this.persons.forEach(person => {
+          person.groups = person.groups.map(function(item) { return ' ' + item.name; });
+        });
       console.log(persons);
-        // this.datasource = persons // USED FOR LAZY LOADING
-        // this.totalRecords = persons.length // USED FOR LAZY LOADING
       },
       (error) => {
-        console.error(error)
+        console.error(error);
 
         // Send error notification
         this.messageService.add({
@@ -57,36 +55,10 @@ export class PersonsComponent implements OnInit, OnDestroy {
     );
   }
 
-
-
   resetSelectedColumns() {
-    this.selectedColumns = this.standardColumns
-    localStorage['selectedPersonColumns'] = JSON.stringify(this.selectedColumns)
+    this.selectedColumns = this.standardColumns;
+    localStorage['selectedPersonColumns'] = JSON.stringify(this.selectedColumns);
   }
-
-  // LAZY LOAD FUnCTION
-  // onGetLazy(event: LazyLoadEvent) { //
-  //   this.loading = true;
-  //   console.log('loading');
-
-  //   this.personsService.getPersons().subscribe(
-  //     (persons) => {
-  //       this.persons = this.datasource.slice(event.first, (event.first + event.rows));
-  //       this.loading = false;
-  //     },
-  //     (error) => {
-  //       console.error(error)
-
-  //       // Send error notification
-  //       this.messageService.add({
-  //         severity: 'error',
-  //         summary: 'Kunde inte hämta från servern',
-  //         detail: 'Testa igen senare eller kontakta teknisk support'
-  //       });
-  //     }
-  //   );
-  // }
-
 
   ngOnInit() {
     this.onGet();
@@ -96,7 +68,6 @@ export class PersonsComponent implements OnInit, OnDestroy {
       .takeWhile(() => this.alive)
       .subscribe(() => this.onGet()
     );
-
 
     // Columns to use in table
     this.cols = [
@@ -111,19 +82,17 @@ export class PersonsComponent implements OnInit, OnDestroy {
       { field: 'membershipStatusPretty', header: 'Medlem' },
       { field: 'memberSincePretty', header: 'Medlem sedan' },
       { field: 'dateOfBaptismPretty', header: 'Dopdag' },
-      // { field: 'tags', header: 'Taggar' },
+      { field: 'tags', header: 'Taggar' },
+      { field: 'groups', header: 'Grupper' },
     ];
 
     // Get selected columns from applicaton storage
     const stored = localStorage['selectedPersonColumns'];
     if (stored) {
-      this.selectedColumns = JSON.parse(stored)
+      this.selectedColumns = JSON.parse(stored);
     } else {
       this.selectedColumns = this.standardColumns;
-    };
-
-
-    // this.loading = true; // USED FOR LAZY LOADING
+    }
   }
 
   ngOnDestroy() {

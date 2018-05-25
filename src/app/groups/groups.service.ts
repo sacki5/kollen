@@ -10,23 +10,24 @@ export class GroupsService {
 
   constructor(private http: HttpClient) { }
 
+
   addGroup(group: Group): Observable<Group> {
-    return this.http.post<Group>('http://localhost:3000/api/group', group)
+    return this.http.post<Group>('/api/group', group);
   }
 
   getGroups(): Observable<Group[]> {
-    return this.http.get<Group[]>('http://localhost:3000/api/groups')
+    return this.http.get<Group[]>('/api/groups');
   }
 
   getGroup(id): Observable<Group> {
-    return this.http.get<Group>('http://localhost:3000/api/group/' + id)
+    return this.http.get<Group>('/api/group/' + id);
   }
 
   deleteGroup(id): Observable<any> {
-    return this.http.delete<Group>('http://localhost:3000/api/group/' + id)
+    return this.http.delete<Group>('/api/group/' + id);
   }
 
   updateGroup(id, group: Group): Observable<Group> {
-    return this.http.patch<Group>('http://localhost:3000/api/group/' + id, group)
+    return this.http.patch<Group>('/api/group/' + id, group);
   }
 }

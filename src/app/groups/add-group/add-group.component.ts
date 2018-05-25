@@ -31,14 +31,17 @@ export class AddGroupComponent implements OnInit {
   save(groupForm: FormGroup) {
     console.log('Saving Group');
 
-    const newGroup = groupForm.value
-    newGroup.members = this.selectedPersons.map(function(item) { return item.id; });
-    newGroup.contact = this.selectedContact;
+    const newGroup = groupForm.value;
 
-    console.log(newGroup);
+    if (this.selectedPersons) {
+      newGroup.members = this.selectedPersons.map(function(item) { return item.id; });
+    }
+    newGroup.contact = this.selectedContact;
+    newGroup.churchIdentity = JSON.parse(localStorage['userData'])._id;
+
     this.groupsService.addGroup(newGroup).subscribe(
       (response) => {
-        console.log(response)
+        console.log(response);
 
          // Send notification if success.
          this.messageService.add({
@@ -51,7 +54,7 @@ export class AddGroupComponent implements OnInit {
         this.router.navigate(['/groups']);
       },
       (error) => {
-        console.error(error)
+        console.error(error);
 
         // Send notification about error
         this.messageService.add({
@@ -60,16 +63,16 @@ export class AddGroupComponent implements OnInit {
           detail: 'Testa igen eller kontakta teknisk support'
         });
       }
-    )
+    );
   }
 
   getPersons() {
     this.personsService.getPersons().subscribe(
       (persons) => {
-        this.persons = persons
+        this.persons = persons;
       },
       (error) => {
-        console.error(error)
+        console.error(error);
 
         // Send error notification
         this.messageService.add({
@@ -82,7 +85,7 @@ export class AddGroupComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getPersons()
+    this.getPersons();
   }
 
 }

@@ -8,6 +8,7 @@ import { MessageService } from 'primeng/components/common/messageservice';
 import { Location } from '@angular/common';
 import { PersonsService } from '../../persons/persons.service';
 import { Person }	from '../../persons/person';
+import { isNull } from '@angular/compiler/src/output/output_ast';
 
 
 @Component({
@@ -21,7 +22,7 @@ export class EditGroupComponent implements OnInit {
   edit = false;
   persons: Person[];
   selectedPersons: any[];
-  selectedContact: Person;
+  selectedContact;
   updatedGroup: Group;
 
   constructor(
@@ -43,13 +44,15 @@ export class EditGroupComponent implements OnInit {
   onGet(id) {
     this.groupsService.getGroup(id).subscribe(
       (group) => {
-        console.log(group)
-        this.group = group
+        console.log(group);
+        this.group = group;
         this.selectedPersons = group.members;
-        this.selectedContact = group.contact.id;
+        if (group.contact) {
+          this.selectedContact = group.contact.id;
+        }
       },
       (error) => console.error(error)
-    )
+    );
   }
 
   save(groupForm: FormGroup) {
@@ -59,7 +62,7 @@ export class EditGroupComponent implements OnInit {
 
     this.groupsService.updateGroup(this.route.snapshot.params.id, groupForm.value).subscribe(
       (response) => {
-        console.log(response)
+        console.log(response);
 
         this.messageService.add({
           severity: 'success',
@@ -67,10 +70,10 @@ export class EditGroupComponent implements OnInit {
           detail: response.name + ' sparad'
         });
 
-        this.location.back();
+        this.router.navigate(['/groups']);
       },
       (error) => {
-        console.error(error)
+        console.error(error);
 
         this.messageService.add({
           severity: 'error',
@@ -78,7 +81,7 @@ export class EditGroupComponent implements OnInit {
           detail: 'Testa igen eller kontakta teknisk support'
         });
       }
-    )
+    );
   }
 
   editTrue() {
@@ -108,7 +111,7 @@ export class EditGroupComponent implements OnInit {
         rejectLabel: 'Nej',
         message: 'Är du säker att du vill ta bort "' + this.group.name + '"',
         accept: () => {
-            this.onDelete()
+            this.onDelete();
         }
     });
   }
@@ -134,24 +137,24 @@ export class EditGroupComponent implements OnInit {
         }
       },
       (error) => {
-        console.error(error)
+        console.error(error);
         this.messageService.add({
           severity: 'error',
           summary: 'Något gick fel',
           detail: 'Testa igen eller kontakta teknisk support'
         });
       }
-    )
+    );
   }
 
   getPersons() {
     this.personsService.getPersonsNoPop().subscribe(
       (persons) => {
-        this.persons = persons
-        console.log(persons)
+        this.persons = persons;
+        console.log(persons);
       },
       (error) => {
-        console.error(error)
+        console.error(error);
 
         // Send error notification
         this.messageService.add({

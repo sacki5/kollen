@@ -22,6 +22,7 @@ export class GroupsComponent implements OnInit, OnDestroy {
   standardColumns: any[];
 
 
+
   constructor(private groupsService: GroupsService, private messageService: MessageService ) {
     this.alive = true;
 
@@ -30,17 +31,18 @@ export class GroupsComponent implements OnInit, OnDestroy {
       { field: 'typePretty', header: 'Typ' },
       { field: 'contactName', header: 'Kontakt' },
       { field: 'numMembers', header: 'Antalet medlemmar' },
-    ]
+    ];
   }
 
   onGet() {
+
     this.groupsService.getGroups().subscribe(
       (groups) => {
-        this.groups = groups
+        this.groups = groups;
         console.log(groups);
       },
       (error) => {
-        console.error(error)
+        console.error(error);
 
         // Send error notification
         this.messageService.add({
@@ -53,8 +55,8 @@ export class GroupsComponent implements OnInit, OnDestroy {
   }
 
   resetSelectedColumns() {
-    this.selectedColumns = this.standardColumns
-    localStorage['selectedGroupColumns'] = JSON.stringify(this.selectedColumns)
+    this.selectedColumns = this.standardColumns;
+    localStorage['selectedGroupColumns'] = JSON.stringify(this.selectedColumns);
   }
 
   ngOnInit() {
@@ -73,10 +75,10 @@ export class GroupsComponent implements OnInit, OnDestroy {
 
     const stored = localStorage['selectedGroupColumns'];
     if (stored) {
-      this.selectedColumns = JSON.parse(stored)
+      this.selectedColumns = JSON.parse(stored);
     } else {
       this.selectedColumns = this.standardColumns;
-    };
+    }
   }
 
   ngOnDestroy() {
