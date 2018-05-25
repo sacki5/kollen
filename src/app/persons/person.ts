@@ -32,4 +32,12 @@ export class Person {
         }
     };
     tags: String[];
+    fullName: String;
+    dateOfBirthFormat;
+    membershipStatus;
+    memberSince;
+    addressLine1;
+    city;
+    zipcode;
+    dateOfBaptism;
 }

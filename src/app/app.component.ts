@@ -8,7 +8,7 @@ import { PersonsService } from './persons/persons.service';
 })
 export class AppComponent implements OnDestroy {
   title = 'Kollen';
-
+  msgs;
 
   ngOnDestroy() {
 

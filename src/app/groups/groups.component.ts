@@ -18,7 +18,7 @@ export class GroupsComponent implements OnInit, OnDestroy {
   groups: Group[];
   cols: any[];
   selectedColumns: any[];
-  selectedPersons: any[];
+  selectedGroups: any[];
   standardColumns: any[];
 
 
