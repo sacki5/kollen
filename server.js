@@ -317,9 +317,9 @@ app.get('/api/profile', checkAuthentication, (req, res) => {
 });
 
 
-// app.get('*', (req, res) => {
-//     res.sendFile(path.join(__dirname+'/dist/'));
-// });
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname+'/dist/'));
+});
 
 app.listen(port, () => {
     console.log('\x1b[36m%s\x1b[0m', `Started on port: ${port}`);
