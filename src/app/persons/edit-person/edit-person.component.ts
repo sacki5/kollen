@@ -105,7 +105,7 @@ export class EditPersonComponent implements OnInit {
   }
 
   goBack(dirty) {
-    if (dirty ) {
+    if (dirty || this.edit) {
       this.confirmationService.confirm({
         header: 'Bekräfta',
         acceptLabel: 'Ja',

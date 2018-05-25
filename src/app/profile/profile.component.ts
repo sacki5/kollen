@@ -3,6 +3,7 @@ import { UserService } from '../user.service';
 import { FormGroup } from '@angular/forms';
 import { MessageService } from 'primeng/components/common/messageservice';
 import { Router } from '@angular/router';
+import { ConfirmationService } from 'primeng/api';
 
 @Component({
   selector: 'app-profile',
@@ -12,14 +13,39 @@ import { Router } from '@angular/router';
 export class ProfileComponent implements OnInit {
 
   user;
+  edit = false;
 
-  constructor(private userService: UserService, private messageService: MessageService, private router: Router) { }
+  constructor(
+    private userService: UserService,
+    private messageService: MessageService,
+    private router: Router,
+    private confirmationService: ConfirmationService
+  ) { }
 
   getUser() {
     this.userService.getProfile().subscribe(
-      (response) => this.user = response,
+      (response) => {
+        this.user = response;
+        localStorage.setItem('userData', JSON.stringify(this.user));
+      },
       (error) => console.error(error)
     );
+  }
+
+  goBack(dirty) {
+    if (dirty || this.edit) {
+      this.confirmationService.confirm({
+        header: 'Bekräfta',
+        acceptLabel: 'Ja',
+        rejectLabel: 'Nej',
+        message: 'Är du säker på att du vil lämna utan att spara?',
+        accept: () => {
+          this.router.navigate(['/persons']);
+        }
+    });
+    } else {
+      this.router.navigate(['/persons']);
+    }
   }
 
   save(userForm: FormGroup) {
@@ -30,9 +56,9 @@ export class ProfileComponent implements OnInit {
 
     this.userService.updateUser(userForm.value).subscribe(
       (response) => {
-        console.log(response);
-        localStorage.setItem('userData', JSON.stringify(response));
-        this.router.navigate(['/profile']);
+        
+        this.getUser();
+
         this.messageService.add({
           severity: 'success',
           summary: 'Sparat',
@@ -49,6 +75,10 @@ export class ProfileComponent implements OnInit {
         });
       }
     );
+  }
+
+  editTrue() {
+    this.edit = true;
   }
 
   ngOnInit() {

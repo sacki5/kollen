@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { PersonsService } from './persons/persons.service';
 
 @Component({
@@ -6,6 +6,12 @@ import { PersonsService } from './persons/persons.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnDestroy {
   title = 'Kollen';
+
+
+  ngOnDestroy() {
+
+  }
+
 }

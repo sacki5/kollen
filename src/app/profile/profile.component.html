@@ -4,7 +4,7 @@
     <form (ngSubmit)="save(userForm.form)" #userForm="ngForm" novalidate>  
       <div class="form-group" [ngClass]="{'was-validated': (church.touched || church.dirty) && !church.valid}">
         <label for="church">Namn på församling'</label>
-        <input type="text" class="form-control" id="church" placeholder="Församlings namn" name="church" #church="ngModel" required [ngModel]="user?.church">
+        <input type="text" class="form-control" id="church" placeholder="Församlings namn" name="church" #church="ngModel" required [ngModel]="user?.church" [disabled]="!edit">
         <div class="invalid-feedback">
           Skirv namn på församlingen
         </div>
@@ -13,7 +13,7 @@
       <!-- First Name required -->
       <div class="form-group col-md-6" [ngClass]="{'was-validated': (firstname.touched || firstname.dirty) && !firstname.valid}">
         <label for="fistname">Förnamn*</label>
-        <input type="text" class="form-control" id="firstname" placeholder="Förnamn" name="firstName" required minlenth="1" [ngModel]="user?.firstName" #firstname="ngModel">
+        <input type="text" class="form-control" id="firstname" placeholder="Förnamn" name="firstName" required minlenth="1" [ngModel]="user?.firstName" #firstname="ngModel" [disabled]="!edit">
         <div class="invalid-feedback">
             Förnamn krävs
         </div>
@@ -22,7 +22,7 @@
       <!-- Last Name required -->
       <div class="form-group col-md-6" [ngClass]="{'was-validated': (lastname.touched || lastname.dirty) && !lastname.valid}">
         <label for="fistname">Efternamn*</label>
-        <input type="text" class="form-control" id="lastname" placeholder="Efternamn" name="lastName" required minlength="1" [ngModel]="user?.lastName" #lastname="ngModel">
+        <input type="text" class="form-control" id="lastname" placeholder="Efternamn" name="lastName" required minlength="1" [ngModel]="user?.lastName" #lastname="ngModel" [disabled]="!edit">
         <div class="invalid-feedback">
             Efternamn krävs
         </div>
@@ -35,7 +35,7 @@
       <!-- Emailadress -->
       <div class="form-group col-md-6" [ngClass]="{'was-validated': (email.touched || email.dirty) && !email.valid}">
         <label for="email">Epostadress*</label>
-        <input type="email" class="form-control" id="email" [email]="true" placeholder="Epostadress" name="email" #email="ngModel" required [ngModel]="user?.email">
+        <input type="email" class="form-control" id="email" [email]="true" placeholder="Epostadress" name="email" #email="ngModel" required [ngModel]="user?.email" [disabled]="!edit">
         <div class="invalid-feedback">
           Skriv in en korrekt epostadress
         </div>
@@ -44,7 +44,7 @@
       <!-- Phonenumber -->
       <div class="form-group col-md-6" [ngClass]="{'was-validated': (phone.touched || phone.dirty) && !phone.valid}">
         <label for="phone">Telefonnummer*</label>
-        <input type="text" class="form-control" id="phone" minlength="5" pattern="[+]?[0-9]*$" placeholder="Telefonnummer" name="phone" #phone="ngModel" required [ngModel]="user?.phone">
+        <input type="text" class="form-control" id="phone" minlength="5" pattern="[+]?[0-9]*$" placeholder="Telefonnummer" name="phone" #phone="ngModel" required [ngModel]="user?.phone" [disabled]="!edit">
         <div class="invalid-feedback">
           Skriv in ett giltligt telefonnummer
         </div>
@@ -54,14 +54,17 @@
       <!-- Password -->
       <div class="form-group" [ngClass]="{'was-validated': (password.touched || password.dirty) && !password.valid}">
         <label for="password">Lösenord*</label>
-        <input type="password" class="form-control" id="password" placeholder="Lösenord (min: 6)" name="password" #password="ngModel" minLength="6" [ngModel]>
+        <input type="password" class="form-control" id="password" placeholder="Lösenord (min: 6)" name="password" #password="ngModel" minLength="6" [ngModel] [disabled]="!edit">
         <div class="invalid-feedback">
           Skriv in ett lösenord med minst 6 tecken
         </div>
       </div>
 
 
-    <button type="submit" [disabled]="!userForm.form.valid" class="btn btn-primary mr-2">Registrera mig</button>
+    <button type="submit" [disabled]="!userForm.form.valid" class="btn btn-primary mr-2" *ngIf="edit">Spara</button>
+		<button type="button" (click)="editTrue()" class="btn btn-primary noPrint mr-2" *ngIf="!edit">Redigera</button>
+		<button type="button" (click)="goBack(userForm.dirty)" class="btn btn-outline-primary noPrint mr-2">Tillbaka</button>
+			
     </form>
   </div>
 </div>

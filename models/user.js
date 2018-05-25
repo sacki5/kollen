@@ -57,21 +57,24 @@ UserSchema.methods.validPassword = function(password) {
 // When user updates information this runs before it updates.
 UserSchema.pre('update', function(next) {
     let user = this;
+
         if (user._update.$set.password) { // If they update the password. Generetes hashed password using bcrypt.
+
             bcrypt.genSalt(10, (err, salt) => {
                 bcrypt.hash(user._update.$set.password, salt, (err, hash) => {
                     user._update.$set.password = hash;
-                    return next();
+                  next();
                 });
-            });
+              });
+
+        } else {
+            next();
         }
-    next();
 });
 
 // runs before a new user is saved.
 UserSchema.pre('save', function(next) {
     let user = this;
-
     if (user.isModified('password')) { // Hashes the password using bcrypt.
         bcrypt.genSalt(10, (err, salt) => {
           bcrypt.hash(user.password, salt, (err, hash) => {

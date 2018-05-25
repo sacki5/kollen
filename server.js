@@ -283,18 +283,24 @@ app.post('/api/login', passport.authenticate('local'), (req, res) => { // Login 
     }, (e) => {
         res.status(400).send(e);
     });
+
+
 });
 
 app.patch('/api/updateUser', checkAuthentication, (req, res) => { // Update current user. Takes user in req.
     let user = req.body;
 
-    User.findByIdAndUpdate(req.user._id, {$set: user}, {new: true}).then(
+    User.findById(req.user._id).then(
         (foundUser) => {
-            res.send(foundUser);
+            foundUser.update({$set: user}, {upsert: true, new: true}).then(
+                (updatedUser) => {
+                    return res.send(updatedUser);
+                }, (e) => {
+                    return res.status(400).send(e);
+                });
         }, (e) => {
-            res.status(400).send(e);
-        }
-    );
+            return res.status(400).send(e);
+        });
 });
 
 app.get('/api/loggedin', (req, res) => {

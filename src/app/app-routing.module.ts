@@ -47,6 +47,9 @@ const routes: Routes = [
         path: 'groups/edit/:id',
         component: EditGroupComponent
       },
+      {
+        path: '**', redirectTo: '/persons'
+      }
     ]
   },
   { path: '**', redirectTo: '/persons'},

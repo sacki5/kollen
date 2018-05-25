@@ -24,7 +24,9 @@ export class MainComponent implements OnInit {
     ) {
 
     this.router.events.subscribe((val) => {
-      this.churchName = JSON.parse(localStorage['userData']).church;
+      if (localStorage['userData']) {
+        this.churchName = JSON.parse(localStorage['userData']).church;
+      }
     });
 
     this.churchName = JSON.parse(localStorage['userData']).church;
@@ -32,8 +34,6 @@ export class MainComponent implements OnInit {
   }
 
   ngOnInit() { }
-
-  
 
 
   logout() {
