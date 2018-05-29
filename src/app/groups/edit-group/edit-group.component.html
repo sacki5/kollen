@@ -36,7 +36,7 @@
         <h5 >Lägg till medlemmar</h5>
         <input type="text" class="form-control form-control-sm" pInputText size="50" placeholder="Sök personer" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
     
-        <p-table #dt [value]="persons" selectionMode="multiple" [(selection)]="selectedPersons" [globalFilterFields]="['fullName']" >
+        <p-table #dt [value]="persons" id="select-person-table" selectionMode="multiple" [(selection)]="selectedPersons" [globalFilterFields]="['fullName']" >
 
             <ng-template pTemplate="body" let-person >
                 <tr >
