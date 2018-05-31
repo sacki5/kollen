@@ -31,7 +31,8 @@ export class AddPersonComponent implements OnInit {
   save(personForm: FormGroup) {
     console.log('Saving');
 
-    personForm.value.churchIdentity = JSON.parse(localStorage['userData'])._id;
+    personForm.value.churchIdentity = JSON.parse(sessionStorage['userData'])._id;
+
     this.personService.addPerson(personForm.value).subscribe(
       (response) => {
         console.log(response);

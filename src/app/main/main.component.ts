@@ -25,11 +25,11 @@ export class MainComponent implements OnInit {
 
     this.router.events.subscribe((val) => {
       if (localStorage['userData']) {
-        this.churchName = JSON.parse(localStorage['userData']).church;
+        this.churchName = JSON.parse(sessionStorage['userData']).church;
       }
     });
 
-    this.churchName = JSON.parse(localStorage['userData']).church;
+    this.churchName = JSON.parse(sessionStorage['userData']).church;
     this.opened = true;
   }
 
@@ -49,7 +49,8 @@ export class MainComponent implements OnInit {
           (response) => {
             if (response) {
 
-              localStorage.clear();
+              sessionStorage.clear();
+
 
               this.messageService.add({
                 severity: 'info',

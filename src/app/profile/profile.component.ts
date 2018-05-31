@@ -26,7 +26,7 @@ export class ProfileComponent implements OnInit {
     this.userService.getProfile().subscribe(
       (response) => {
         this.user = response;
-        localStorage.setItem('userData', JSON.stringify(this.user));
+        sessionStorage.setItem('userData', JSON.stringify(this.user));
       },
       (error) => console.error(error)
     );

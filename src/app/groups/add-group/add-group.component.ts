@@ -37,7 +37,7 @@ export class AddGroupComponent implements OnInit {
       newGroup.members = this.selectedPersons.map(function(item) { return item.id; });
     }
     newGroup.contact = this.selectedContact;
-    newGroup.churchIdentity = JSON.parse(localStorage['userData'])._id;
+    newGroup.churchIdentity = JSON.parse(sessionStorage['userData'])._id;
 
     this.groupsService.addGroup(newGroup).subscribe(
       (response) => {

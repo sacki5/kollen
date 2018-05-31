@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
     this.userService.loginUser(userForm.value).subscribe(
       (response) => {
         console.log(response);
-        localStorage.setItem('userData', JSON.stringify(response));
+        sessionStorage.setItem('userData', JSON.stringify(response));
         this.router.navigate(['/persons']);
       },
       (error) => {
